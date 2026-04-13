@@ -11,6 +11,7 @@
             --black: #000000;
             --dark-grey: #121212;
             --white: #ffffff;
+            --grey-text: #888;
         }
 
         * {
@@ -27,6 +28,42 @@
             overflow-x: hidden;
         }
 
+        /* Top Bar dla Ankiety */
+        .survey-bar {
+            background-color: var(--neon-yellow);
+            color: var(--black);
+            padding: 10px 5%;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            letter-spacing: 1px;
+        }
+
+        .btn-survey {
+            background: var(--black);
+            color: var(--neon-yellow);
+            padding: 5px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            transition: 0.3s;
+            border: 1px solid var(--black);
+        }
+
+        .btn-survey:hover {
+            background: transparent;
+            color: var(--black);
+        }
+
         /* Menu */
         nav {
             display: flex;
@@ -35,6 +72,7 @@
             padding: 20px 5%;
             background: rgba(0,0,0,0.9);
             position: fixed;
+            top: 40px; 
             width: 100%;
             z-index: 1000;
             border-bottom: 1px solid #222;
@@ -126,7 +164,7 @@
         }
 
         #subpage-treningi, #subpage-online, #subpage-plan {
-            display: none; /* Ukryte na starcie */
+            display: none;
             padding-top: 150px;
             min-height: 80vh;
         }
@@ -168,30 +206,102 @@
             text-transform: uppercase;
         }
 
-        /* Cenniki */
-        .price-list {
-            list-style: none;
-            margin-top: 30px;
-            max-width: 800px;
+        /* Sekcja Blog */
+        .blog-section { background-color: var(--black); }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .blog-post {
+            background: #080808;
+            border: 1px solid #1a1a1a;
+            padding: 30px;
+            transition: 0.3s;
+        }
+        .blog-post:hover { border-color: var(--neon-yellow); }
+        .blog-category {
+            color: var(--neon-yellow);
+            font-size: 0.7rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .blog-post h3 {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+        .blog-post p { color: var(--grey-text); font-size: 0.95rem; margin-bottom: 20px; }
+        .read-more {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--neon-yellow);
+            padding-bottom: 2px;
         }
 
+        /* --- SEKCJA FAQ --- */
+        .faq-container {
+            max-width: 900px;
+            margin-top: 30px;
+        }
+        .faq-item {
+            background: var(--dark-grey);
+            margin-bottom: 15px;
+            border: 1px solid #222;
+        }
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .faq-question:hover { color: var(--neon-yellow); }
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--neon-yellow);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #1a1a1a;
+            padding: 0 25px;
+            color: var(--grey-text);
+        }
+        .faq-item.active .faq-answer {
+            max-height: 350px; /* Zwiększone dla dłuższych tekstów */
+            padding: 20px 25px;
+        }
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+
+        /* Cenniki i Reszta */
+        .price-list { list-style: none; margin-top: 30px; max-width: 800px; }
         .price-item {
             background: var(--dark-grey);
             margin-bottom: 15px;
             padding: 25px;
             border-left: 4px solid var(--neon-yellow);
-            font-size: 1.2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .price-value {
-            font-family: 'Anton', sans-serif;
-            color: var(--neon-yellow);
-            font-size: 1.5rem;
-        }
-
+        .price-value { font-family: 'Anton', sans-serif; color: var(--neon-yellow); font-size: 1.5rem; }
         .back-link {
             display: inline-block;
             margin-top: 40px;
@@ -200,84 +310,38 @@
             text-transform: uppercase;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
         }
+        .about { background-color: var(--dark-grey); display: flex; flex-wrap: wrap; align-items: center; gap: 50px; }
+        .about-content h2 { font-family: 'Anton', sans-serif; font-size: 3rem; margin-bottom: 20px; text-transform: uppercase; }
+        .highlight { color: var(--neon-yellow); }
 
-        .back-link:hover {
-            color: var(--neon-yellow);
-        }
-
-        /* Sekcja O Mnie */
-        .about {
-            background-color: var(--dark-grey);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .about-content {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .about-content h2 {
-            font-family: 'Anton', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .highlight {
-            color: var(--neon-yellow);
-        }
-
-        /* Stopka */
-        footer {
-            padding: 60px 5%;
-            background: var(--black);
-            border-top: 2px solid var(--neon-yellow);
-        }
-
-        .footer-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 40px;
-        }
-
-        .footer-col h4 {
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: var(--neon-yellow);
-        }
-
-        .footer-col a, .footer-col p {
-            display: block;
-            color: #888;
-            text-decoration: none;
-            margin-bottom: 10px;
-            transition: 0.3s;
-        }
-
-        .footer-col a:hover {
-            color: var(--white);
-        }
+        footer { padding: 60px 5%; background: var(--black); border-top: 2px solid var(--neon-yellow); }
+        .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; }
+        .footer-col h4 { text-transform: uppercase; margin-bottom: 20px; color: var(--neon-yellow); }
+        .footer-col a, .footer-col p { display: block; color: #888; text-decoration: none; margin-bottom: 10px; }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hero h1 { font-size: 3.5rem; }
-            .price-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .survey-bar { font-size: 0.7rem; flex-direction: column; gap: 5px; }
+            nav { top: 55px; }
         }
     </style>
 </head>
 <body>
+
+    <div class="survey-bar">
+        <span>Jeśli jeszcze nie uzupełniłeś ankiety, to nie zwlekaj!</span>
+        <a href="https://forms.gle/giLVZfnndwoMKzJJ7" target="_blank" class="btn-survey">WYPEŁNIJ TERAZ</a>
+    </div>
 
     <nav>
         <div class="logo" onclick="showPage('main-page')">SIUDY</div>
         <ul class="nav-links">
             <li><a href="javascript:void(0)" onclick="showPage('main-page')">Start</a></li>
             <li><a href="#produkty">Oferta</a></li>
+            <li><a href="#mity-fakty">Blog</a></li>
+            <li><a href="#faq">Wiedza</a></li>
             <li><a href="#kontakt">Kontakt</a></li>
         </ul>
     </nav>
@@ -290,23 +354,19 @@
         </section>
 
         <section class="page-section products" id="produkty">
-            <h2 class="section-title">Twoje Narzędzia</h2>
+            <h2 class="section-title">Moje Oferty</h2>
             <div class="grid">
                 <div class="card" onclick="showPage('subpage-treningi')">
                     <h3>Trening Personalny</h3>
-                    <p>Indywidualne sesje 1-na-1 skupione na Twojej technice. Powiat Oświęcimski i Chrzanowski. <strong>(Cennik)</strong></p>
+                    <p>Sesje 1-na-1. Powiat Oświęcimski i Chrzanowski. <strong>(Cennik)</strong></p>
                 </div>
                 <div class="card" onclick="showPage('subpage-online')">
                     <h3>Trening Online</h3>
-                    <p>Trenuj z jakiegokolwiek miejsca na świecie. Pełne prowadzenie zdalne i analiza wideo. <strong>(Cennik)</strong></p>
+                    <p>Pełne prowadzenie zdalne i analiza wideo. <strong>(Cennik)</strong></p>
                 </div>
                 <div class="card" onclick="showPage('subpage-plan')">
                     <h3>Plan Treningowy</h3>
-                    <p>Dopracowany plan treningowy do Twojego celu, możliwości i miejsca treningu. <strong>(Cennik)</strong></p>
-                </div>
-                <div class="card">
-                    <h3>Dopasowana Dieta</h3>
-                    <p>Precyzyjny plan żywieniowy, który napędza wyniki, a nie ogranicza radości z jedzenia.</p>
+                    <p>Dopracowany plan pod Twój konkretny cel. <strong>(Cennik)</strong></p>
                 </div>
             </div>
         </section>
@@ -314,48 +374,100 @@
         <section class="page-section about" id="o-mnie">
             <div class="about-content">
                 <h2>ŚWIEŻE PODEJŚCIE DO <span class="highlight">BYCIA FIT</span></h2>
-                <p>Nazywam się Seba i nie sprzedaję kolejnej "metody cud". Sprzedaję dyscyplinę ubraną w nowoczesną naukę o sporcie. Moje podejście łączy funkcjonalność z estetyką.</p>
+                <p>Nazywam się Seba. Sprzedaję dyscyplinę ubraną w nowoczesną naukę o sporcie. Moje podejście łączy funkcjonalność z estetyką.</p>
+            </div>
+        </section>
+
+        <section class="page-section blog-section" id="mity-fakty">
+            <h2 class="section-title">Mity i Fakty</h2>
+            <div class="blog-grid">
+                <article class="blog-post">
+                    <span class="blog-category">Trening</span>
+                    <h3>Zakwasy to oznaka dobrego treningu?</h3>
+                    <p><strong>MIT.</strong> DOMS (opóźniona bolesność mięśniowa) to jedynie reakcja na nowy bodziec lub nadmierne uszkodzenia. Możesz budować formę bez bólu na drugi dzień – kluczem jest progresja ciężaru, a nie to, jak bardzo nie możesz zejść po schodach.</p>
+                </article>
+
+                <article class="blog-post">
+                    <span class="blog-category">Dieta</span>
+                    <h3>Musisz zjeść białko do 30 min po treningu?</h3>
+                    <p><strong>MIT.</strong> Słynne "okno anaboliczne" trwa znacznie dłużej. Twoje ciało buduje mięśnie przez całą dobę. Ważniejsze jest to, ile białka zjesz w ciągu całego dnia, niż to, czy wypijesz szejka jeszcze w szatni.</p>
+                </article>
+
+                <article class="blog-post">
+                    <span class="blog-category">Spalanie</span>
+                    <h3>Brzuszki spalają tłuszcz z brzucha?</h3>
+                    <p><strong>MIT.</strong> Nie da się spalać tłuszczu miejscowo. Brzuszki wzmocnią mięśnie, ale będą one ukryte, dopóki nie utrzymasz deficytu kalorycznego. Chcesz widzieć "kostkę"? Zacznij od kuchni, nie od maty.</p>
+                </article>
+
+                <article class="blog-post">
+                    <span class="blog-category">Fizjologia</span>
+                    <h3>Pot to spalany tłuszcz?</h3>
+                    <p><strong>MIT.</strong> Pot to tylko system chłodzenia organizmu. Możesz pocić się w saunie, nie spalając ani grama tłuszczu, i możesz spalać tłuszcz na mrozie, prawie się nie pocąc. Intensywność ≠ ilość wylanego potu.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="page-section" id="faq">
+            <h2 class="section-title">Wiedza w pigułce</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Na co powinnismy zwracać uwagę gdy ćwiczymy na siłowni?</div>
+                    <div class="faq-answer">
+                        Priorytetem jest zawsze <strong>technika i czucie mięśniowe</strong>, a nie sam ciężar. Kluczowe elementy to: 
+                        <br>• Kontrola fazy ekscentrycznej (powolne opuszczanie ciężaru), 
+                        <br>• Stabilizacja korpusu (core), 
+                        <br>• Pełny zakres ruchu. 
+                        <br>Bezpieczeństwo stawów to fundament długowieczności w sporcie.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Jakie są fundamenty przy budowaniu estetycznej sylwetki?</div>
+                    <div class="faq-answer">
+                        Estetyka to balans między masą mięśniową a niskim poziomem tkanki tłuszczowej. Fundamenty to:
+                        <br><strong>1. Progresywne przeładowanie:</strong> Zwiększanie objętości lub ciężaru z treningu na trening.
+                        <br><strong>2. Podaż białka:</strong> Niezbędna do regeneracji i budowy tkanek.
+                        <br><strong>3. Cierpliwość:</strong> Sylwetka to maraton, nie sprint. Skupienie na słabych partiach pozwala zachować proporcje "V".
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Czy same suplementy wystarczą do zrobienia formy?</div>
+                    <div class="faq-answer">
+                        Zdecydowanie nie. Suplementacja to tylko 5% sukcesu – dodatek. Bez ciężkiego treningu, odpowiedniej diety i regeneracji (snu), nawet najlepsze odżywki nie przyniosą widocznych rezultatów.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Jak często należy zmieniać plan treningowy?</div>
+                    <div class="faq-answer">
+                        Planu nie zmieniamy, dopóki przynosi efekty. Stałość w ćwiczeniach pozwala na realne monitorowanie progresu siłowego. Zmiany wprowadzamy zazwyczaj co 8-10 tygodni lub gdy następuje realna stagnacja.
+                    </div>
+                </div>
             </div>
         </section>
     </div>
 
     <div id="subpage-treningi" class="page-section">
         <h2 class="section-title">TRENINGI PERSONALNE</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">
-            Wszystkie siłownie na terenie powiatu <span class="highlight">Oświęcimskiego</span> i <span class="highlight">Chrzanowskiego</span>.
-        </p>
         <div class="price-list">
-            <div class="price-item"><span>1 OSOBA / 1 GODZINA</span> <span class="price-value">85 ZŁ</span></div>
-            <div class="price-item"><span>2 OSOBY / 1 GODZINA</span> <span class="price-value">140 ZŁ</span></div>
-            <div class="price-item"><span>3 OSOBY / 1 GODZINA</span> <span class="price-value">250 ZŁ</span></div>
+            <div class="price-item"><span>PAKIET 4 TRENINGI</span> <span class="price-value">520 ZŁ</span></div>
+            <div class="price-item"><span>PAKIET 8 TRENINGÓW</span> <span class="price-value">1000 ZŁ</span></div>
+            <div class="price-item"><span>PAKIET 12 TRENINGÓW</span> <span class="price-value">1440 ZŁ</span></div>
         </div>
         <div class="back-link" onclick="showPage('main-page')">← Wróć do strony głównej</div>
     </div>
 
     <div id="subpage-online" class="page-section">
         <h2 class="section-title">TRENINGI ONLINE</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">
-            <span class="highlight">Trenuj z jakiegokolwiek miejsca na świecie.</span> Brak barier, tylko Ty i Twój cel.
-        </p>
         <div class="price-list">
-            <div class="price-item"><span>1 OSOBA / 1 GODZINA</span> <span class="price-value">60 ZŁ</span></div>
-            <div class="price-item"><span>2 OSOBY / 1 GODZINA</span> <span class="price-value">120 ZŁ</span></div>
-            <div class="price-item"><span>3 OSOBY / 1 GODZINA</span> <span class="price-value">180 ZŁ</span></div>
+            <div class="price-item"><span>MIESIĘCZNE PROWADZENIE</span> <span class="price-value">400 ZŁ</span></div>
         </div>
         <div class="back-link" onclick="showPage('main-page')">← Wróć do strony głównej</div>
     </div>
 
     <div id="subpage-plan" class="page-section">
         <h2 class="section-title">PLAN TRENINGOWY</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">
-            Dopracowany plan treningowy do Twojego <span class="highlight">celu, możliwości i miejsca treningu.</span>
-        </p>
         <div class="price-list">
-            <div class="price-item"><span>1 DNIOWY PLAN</span> <span class="price-value">45 ZŁ</span></div>
-            <div class="price-item"><span>2 DNIOWY PLAN</span> <span class="price-value">60 ZŁ</span></div>
-            <div class="price-item"><span>3 DNIOWY PLAN</span> <span class="price-value">75 ZŁ</span></div>
-            <div class="price-item"><span>4 DNIOWY PLAN</span> <span class="price-value">90 ZŁ</span></div>
-            <div class="price-item"><span>5 DNIOWY PLAN</span> <span class="price-value">105 ZŁ</span></div>
+            <div class="price-item"><span>3 DNIOWY PLAN</span> <span class="price-value">90 ZŁ</span></div>
+            <div class="price-item"><span>4 DNIOWY PLAN</span> <span class="price-value">105 ZŁ</span></div>
         </div>
         <div class="back-link" onclick="showPage('main-page')">← Wróć do strony głównej</div>
     </div>
@@ -373,25 +485,28 @@
             <div class="footer-col">
                 <h4>Kontakt</h4>
                 <a href="mailto:SEBASIUDY522@gmail.com">EMAIL: SEBASIUDY522@GMAIL.COM</a>
-                <p>TEL: 537 666 296</p>
+                <p>TEL: 537 XXX 296</p>
             </div>
         </div>
     </footer>
 
     <script>
         function showPage(pageId) {
-            // Ukryj wszystkie widoki
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('subpage-treningi').style.display = 'none';
             document.getElementById('subpage-online').style.display = 'none';
             document.getElementById('subpage-plan').style.display = 'none';
-            
-            // Pokaż wybrany
             document.getElementById(pageId).style.display = 'block';
-            
-            // Przewiń na górę
             window.scrollTo(0,0);
         }
+
+        // Obsługa FAQ
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
     </script>
 
 </body>
