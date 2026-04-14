@@ -46,6 +46,13 @@
             align-items: center;
             gap: 15px;
             letter-spacing: 1px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .survey-bar.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
         }
 
         .btn-survey {
@@ -64,6 +71,14 @@
             color: var(--black);
         }
 
+        .close-survey {
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
         /* Menu */
         nav {
             display: flex;
@@ -76,6 +91,11 @@
             width: 100%;
             z-index: 1000;
             border-bottom: 1px solid #222;
+            transition: top 0.3s ease;
+        }
+
+        nav.full-top {
+            top: 0;
         }
 
         .logo {
@@ -283,7 +303,7 @@
             color: var(--grey-text);
         }
         .faq-item.active .faq-answer {
-            max-height: 350px; /* Zwiększone dla dłuższych tekstów */
+            max-height: 350px; 
             padding: 20px 25px;
         }
         .faq-item.active .faq-question::after {
@@ -323,19 +343,22 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hero h1 { font-size: 3.5rem; }
-            .survey-bar { font-size: 0.7rem; flex-direction: column; gap: 5px; }
+            .survey-bar { font-size: 0.7rem; flex-direction: row; gap: 5px; }
             nav { top: 55px; }
+            nav.full-top { top: 0; }
+            .price-item { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="survey-bar">
+    <div class="survey-bar" id="survey-bar">
         <span>Jeśli jeszcze nie uzupełniłeś ankiety, to nie zwlekaj!</span>
         <a href="https://forms.gle/giLVZfnndwoMKzJJ7" target="_blank" class="btn-survey">WYPEŁNIJ TERAZ</a>
+        <span class="close-survey" onclick="hideSurvey()">×</span>
     </div>
 
-    <nav>
+    <nav id="main-nav">
         <div class="logo" onclick="showPage('main-page')">SIUDY</div>
         <ul class="nav-links">
             <li><a href="javascript:void(0)" onclick="showPage('main-page')">Start</a></li>
@@ -447,27 +470,54 @@
 
     <div id="subpage-treningi" class="page-section">
         <h2 class="section-title">TRENINGI PERSONALNE</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">
+            Wszystkie siłownie na terenie powiatu <span class="highlight">Oświęcimskiego</span> i <span class="highlight">Chrzanowskiego</span>.
+        </p>
+        <p style="color: var(--neon-yellow); font-weight: 700; margin-bottom: 30px; text-transform: uppercase;">
+            * Minimalna współpraca: pakiet 1 trening na 1 miesiąc.
+        </p>
+        
         <div class="price-list">
-            <div class="price-item"><span>PAKIET 4 TRENINGI</span> <span class="price-value">520 ZŁ</span></div>
-            <div class="price-item"><span>PAKIET 8 TRENINGÓW</span> <span class="price-value">1000 ZŁ</span></div>
-            <div class="price-item"><span>PAKIET 12 TRENINGÓW</span> <span class="price-value">1440 ZŁ</span></div>
+            <div class="price-item">
+                <span>PAKIET 4 TRENINGI (1 os.) Raz w tygodniu</span> 
+                <span class="price-value"> 520 ZŁ / 130 ZŁ</span>
+            </div>
+            <div class="price-item">
+                <span>PAKIET 8 TRENINGÓW (1 os.) Dwa razy w tygodniu</span> 
+                <span class="price-value"> 1000 ZŁ / 125 ZŁ</span>
+            </div>
+            <div class="price-item">
+                <span>PAKIET 12 TRENINGÓW (1.os) Trzy razy w tygodniu</span> 
+                <span class="price-value"> 1440 ZŁ / 120 ZŁ </span>
+            </div>
         </div>
         <div class="back-link" onclick="showPage('main-page')">← Wróć do strony głównej</div>
     </div>
 
     <div id="subpage-online" class="page-section">
         <h2 class="section-title">TRENINGI ONLINE</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">
+            <span class="highlight">Trenuj z jakiegokolwiek miejsca na świecie.</span> Brak barier, tylko Ty i Twój cel.
+        </p>
         <div class="price-list">
-            <div class="price-item"><span>MIESIĘCZNE PROWADZENIE</span> <span class="price-value">400 ZŁ</span></div>
+            <div class="price-item"><span>PAKIET 4 TRENINGI (1 os.) Raz w tygodniu</span> <span class="price-value"> 400 ZŁ / 100 ZŁ</span></div>
+            <div class="price-item"><span>PAKIET 8 TRENINGÓW (1 os.) Dwa razy w tygodniu</span> <span class="price-value">800 ZŁ / 100 ZŁ </span></div>
+            <div class="price-item"><span>PAKIET 12 TRENINGÓW (1.os) Trzy razy w tygodniu</span> <span class="price-value">1200 ZŁ / 100 ZŁ</span></div>
         </div>
         <div class="back-link" onclick="showPage('main-page')">← Wróć do strony głównej</div>
     </div>
 
     <div id="subpage-plan" class="page-section">
         <h2 class="section-title">PLAN TRENINGOWY</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">
+            Dopracowany plan treningowy do Twojego <span class="highlight">celu, możliwości i miejsca treningu.</span>
+        </p>
         <div class="price-list">
+            <div class="price-item"><span>1 DNIOWY PLAN</span> <span class="price-value">60 ZŁ</span></div>
+            <div class="price-item"><span>2 DNIOWY PLAN</span> <span class="price-value">75 ZŁ</span></div>
             <div class="price-item"><span>3 DNIOWY PLAN</span> <span class="price-value">90 ZŁ</span></div>
             <div class="price-item"><span>4 DNIOWY PLAN</span> <span class="price-value">105 ZŁ</span></div>
+            <div class="price-item"><span>5 DNIOWY PLAN</span> <span class="price-value">120 ZŁ</span></div>
         </div>
         <div class="back-link" onclick="showPage('main-page')">← Wróć do strony głównej</div>
     </div>
@@ -506,6 +556,20 @@
                 const parent = item.parentElement;
                 parent.classList.toggle('active');
             });
+        });
+
+        // Obsługa chowania paska ankiety
+        function hideSurvey() {
+            const bar = document.getElementById('survey-bar');
+            const nav = document.getElementById('main-nav');
+            bar.classList.add('hidden');
+            nav.classList.add('full-top');
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                hideSurvey();
+            }
         });
     </script>
 
